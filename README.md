@@ -1,4 +1,3 @@
-# Assignment2
 #Assignment 2:  Share forked copy by 1/27/18
 Assignment will be 2 will be turned in via your github account.  Please fork, assignment 2 from trgn510.  You can then edit inline at github.  We won't be doing a markdown style yet, but why not try that? Its very nice! You can essentially copy and paste into the README your answers after testing them in the server, replacing the key text.  Analysis must be completed on the server trgn510.pmed.io, and will be used to help assist you in case of issues.   The directory tree must be proper per the assignment.  I'll review your github and the server.  
 
