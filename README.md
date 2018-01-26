@@ -37,7 +37,7 @@ cd ~
 mkdir -p bin projects/assign2
 export PATH=$PATH:~/bin
 cd projects/assign2~
-**cd ~
+**cd ~;
 ls -R** 
 
 ## 3. Shared infrastructure
