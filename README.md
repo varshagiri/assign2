@@ -12,12 +12,12 @@ They'll be places you are expected to substitute a line for the answer. These ar
 *Replace me with answer*
 We then replace the answer with "**" before and after "**". How many?  Two asterisks before and two after. Why - take a look at markdown.
 
-**whoami**
+**Varsha Giri**
 
 ## 1. Logging in
 Please login to trgn510.pmed.io and verify that you are in trgn510.pmed.io using hostname.
 
-*Place the unix command here that tell us our host*
+**hostname** 
 ## 2. PATHs and organization.
 There are lots of environmental variables loaded into bash through .bashrc.  One is the $PATH variable.  Any executables within these folders do not require typing a path to run.  For example below we see all the paths where our executables without a path can be located.  In a step below we extend it.
 
@@ -36,8 +36,9 @@ Lets create a local "bin", using mkdir bin and lets create an assignment folder.
 cd ~
 mkdir -p bin projects/assign2
 export PATH=$PATH:~/bin
-cd projects/assign2
-*Place the unix here listing home directory, recursively
+cd projects/assign2~
+**cd ~
+ls -R** 
 
 ## 3. Shared infrastructure
 who
@@ -54,7 +55,7 @@ Ok - that's too many people who have logged on, lets just pipe it to tail to see
 last | tail
 What if we wanted the first 5 lines - there must be a way to take the head of a file, such as the first 5 lines.
 
-*Place a unix command(s) of first 5 people who logged onto this server using "last'
+**last | head -5**
 
 ## 4.  Our network
 I wonder if this server can see the internet.  Can it see google. Lets ping Google with a little message and see how long it takes to respond.
@@ -64,7 +65,7 @@ This provides the time - and is one indicate of the network.  If things are slow
 
 Copy the link to download the file "HG001_GRCh37_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-10X-SOLID_CHROM1-X_v.3.3.2_highconf_PGandRTGphasetransfer.vcf.gz".  On your server, download this by typing wget and the full path of the URL.
 
-*Place a unix command(s) to download using wget NA12878's variants.*
+**wget ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/release/NA12878_HG001/NISTv3.3.2/GRCh37/HG001_GRCh37_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-10X-SOLID_CHROM1-X_v.3.3.2_highconf_PGandRTGphasetransfer.vcf.gz**
 
 ## 5.  Example by a person's genome.
 This is the pretty much the genome that has been sequenced by the most platforms the most times, and for which we have identified with highest confidence the genetic variants in that person.  The file ends in ".gz", which means it is zipped.  Unzip it
@@ -72,14 +73,14 @@ This is the pretty much the genome that has been sequenced by the most platforms
 gunzip HG001_GRCh37_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-10X-SOLID_CHROM1-X_v.3.3.2_highconf_PGandRTGphasetransfer.vcf.gz
 This made it plain text readable.  You can preview file using "less", please do that knowing you jump around using vim commands such as control-F.  We notice there are many lines that begin with a "#" forming the header.  We then get to variants which have a format specified in the VCF4.2 spec.  Please paste below the command to download via wget on the server the Spec for VCF 4.2.  You should have wget URL, where URL is the URL of a PDF file.
 
-*Place a unix command(s) to download VCF4.2 spec.*
+**wget https://samtools.github.io/hts-specs/VCFv4.2.pdf**
 
 ## 6.  File sizes, and compression.
 What is the size of the uncompressed file and what is the size of the compressed file
 
-*Place a unix command to give size of compressed file*
+**du -h HG001_GRCh37_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-10X-SOLID_CHROM1-X_v.3.3.2_highconf_PGandRTGphasetransfer.vcf.gz**
 
-*Place a unix command to give size of uncompressed file*
+**du -h HG001_GRCh37_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-10X-SOLID_CHROM1-X_v.3.3.2_highconf_PGandRTGphasetransfer.vcf**
 
 That's a fair amount of space.  How much space do we have to work with.  Type 'df -h' to find out.
 
@@ -89,7 +90,7 @@ How would we create a file that only includes variants.  Well 'grep' is a hand c
 grep -v "^#" HG001_GRCh37_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-10X-SOLID_CHROM1-X_v.3.3.2_highconf_PGandRTGphasetransfer.vcf > NA12878.variants.vcf
 How many variants are in the file?  The standard tool to count the number of lines is call 'wc', however you need to actually put a flag for lines.
 
-*Place a unix command to give the number of variants (lines) in this person.  Use wc with the appropriate option*
+**wc -l NA12878.variants.vcf**
 
 Lets look at the contents again using something like more, less, or head (type less and the VCF file name).  We see a space or tab delimited file with chromosome, position in the genome,  the name of a variant if it has a name (dbSNP), the reference base(s), the base in the person or so called alternative base, a quality score, a field saying whether this variant PASS or has another filter field, a series of semi-colon delimited informational fields that are variable in number by line, a field which describes later fields providing genotype.  That field is colon delimited.  We then see a field which gives the genotype for a person, identifying if they have two or one copies of the variant.  If we are using less to view the file, we can see what the space like character is.  Simply, type forward slash (/), and the space character.  You should see spaces highlight.  If we wanted to see tabs, we need to type "control-v", and then the tab character.  We can also see that it is a variable number of spaces.
 
@@ -114,7 +115,7 @@ Ok - fail.  Another option is by control-v then 'tab'.  That creates a single ch
 `cut -d "<control-v + tab" -f1 NA12878.variants.vcf | head`
 Did you notice we piped to head?  If you don't do that you'll be waiting for 4 million numbers to go by.  However, what we want is the unique or distinct numbers.  Instead of piping to head what can we pipe to so the output is only the chomosomes?  Ok - the goal of this course is to teach you how to use all languages and comamnds to quickly get to the goal, so google it. Look for a way to print unique results, and sort will probably be involved.  One command, but several pipes.
 
-*Place a unix command that gives unique chromosomes in this individual*
+**cut -f1 NA12878.variants.vcf | uniq**
 The result should be this
 
  
@@ -125,12 +126,12 @@ I don't see Y this must be female.  Maybe we should double check.  If they are f
 
 Ok.  That's not quite what I am looking for.  I just want the genotypes.  Instead of head, can you pipe the above result into another pipe, grabbing the first field?
 
-*Place a unix command that gives genotype calls as a single column, knowing we have pipes*
+**cut -d " " -f10 NA12878.variants.vcf | cut -d ":" -f1
 
 
 Ok, first what are the "0/1" vs. 0|1 and so forth? This information is in the header. Find out using more and the original file.  Lets count the number of "0|1".  How do we count the number of unique genotypes?  Make sure you understand the command that's helping here - you might need to make sure they are sorted.
 
-*Place a unix command that gives sorted unique genotype calls as a single column.*
+**cut -d " " -f10 NA12878.variants.vcf | cut -d ":" -f1 | sort | uniq
 
 ## 9.  Python scripting
 If we look at our file, we really have tables in tables.  The info column is column 8.  We've been doing a lot of bash scripting.  We know how to make a bash script.  Lets switch languages and introduce python.  Now - you might hear about perl - but perl isn't just a dead language its a zombie language used by bioinformaticians from the 90s.  Once you learn perl, you won't learn anything else so lets start you on the right foot.  Learning python as the 10th problem of the second assignment, sounds ambitious - but they teach programming to 8 year olds in hour, so why not graduate students.  Basically, instead of #!/usr/bin/bash as the first line, we will do #!/usr/bin/py.  Please create your first python script by typing "vim command.py". 
@@ -150,7 +151,7 @@ Lets explain this.  The first line tells us that python will run the remaining l
 
 We have command.py, but we have not made it executable.  Please change the permission such that we can run command.py.
 
-*Place a bash command that makes command.py executable*
+**chmod 755 command.py**
 
 Now that's executable, we can test it out as we do below, typing './command.py', recognizing that command.py is not in our path, and we must give then the path.  We do this with "./" before the name when we are already in the correct directory.
 
@@ -204,9 +205,9 @@ echo ";gene_symbol=PTEN;gene_name=phospho;gene_sequence=atc;" | match.py -r "gen
 
 So lets try just two last commands. If you need help, you can check out regex101.com
 
-*Provide command that gives gene_name from above, instead of gene_symbol using your new match.py program.*
+**echo ";gene_symbol=PTEN;gene_name=phospho;gene_sequence=atc;" | pymatch.py. -r "gene_name=(.*?);"**
 
-*Provide command that gives gene_name & gene_sequence from above in oneline.*
+**echo ";gene_symbol=PTEN;gene_name=phospho;gene_sequence=atc;" | pymatch.py. -r "gene_name=(.*?);gene_sequence=(.*?);"**
  
 
 Pages: 1 2 3 4 5 6 7 8
